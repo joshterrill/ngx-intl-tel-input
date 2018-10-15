@@ -73,20 +73,26 @@ export class NgxIntlTelInputComponent implements OnInit {
       country.priority = +c[3] || 0;
       country.areaCode = +c[4] || null;
       country.flagClass = country.iso2.toLocaleLowerCase();
-      country.placeHolder = this.getPhoneNumberPlaceHolder(country.iso2.toUpperCase());
+      country.placeHolder = this.formatPhoneNumber('2236512366', country);
       this.allCountries.push(country);
     });
   }
 
-  protected getPhoneNumberPlaceHolder(countryCode: string): string {
+  protected formatPhoneNumber(value: string, country: any): string {
     const phoneUtil = _.PhoneNumberUtil.getInstance();
     const pnf = _.PhoneNumberFormat;
     try {
-      let phoneNumber = phoneUtil.parse('2236512366', countryCode);
-      return phoneUtil.format(phoneNumber, pnf.INTERNATIONAL);
+      let phoneNumber = phoneUtil.parse(value, country.iso2.toUpperCase());
+      return phoneUtil.format(phoneNumber, pnf.INTERNATIONAL).replace('+' + country.dialCode + ' ', '');
     } catch (e) {
-      console.log('CountryCode: "' + countryCode + '" ' + e);
+      console.log('CountryCode: "' + country.iso2.toUpperCase() + '" ' + e);
       return e;
     }
+  }
+
+  protected calculatePadding() {
+    const dialCode = this.selectedCountry.dialCode;
+    const offset = dialCode.length * 7;
+    return 56 + offset + 'px';
   }
 }

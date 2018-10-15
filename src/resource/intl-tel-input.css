@@ -160,6 +160,11 @@
     padding: 1px; }
 .intl-tel-input.iti-container:hover {
     cursor: pointer; }
+.intl-tel-input .tel-prefix {
+    position: absolute;
+    left: 45px;
+    z-index: 9;
+    top: 8px; }
 
 .iti-mobile .intl-tel-input.iti-container {
     top: 30px;
