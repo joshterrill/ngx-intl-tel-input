@@ -11,6 +11,7 @@ import * as _ from 'google-libphonenumber';
 })
 export class NgxIntlTelInputComponent implements OnInit {
   @Input() value = '';
+  @Input() customClass = '';
   @Input() preferredCountries: Array<string> = [];
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
