@@ -38,6 +38,7 @@ export class NgxIntlTelInputComponent implements OnInit {
     } else {
       this.selectedCountry = this.allCountries[0];
     }
+    this.phone_number = this.value;
   }
 
   public onPhoneNumberChange(): void {
