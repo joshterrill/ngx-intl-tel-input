@@ -39,18 +39,18 @@ export class NgxIntlTelInputComponent implements OnInit {
     } else {
       this.selectedCountry = this.allCountries[0];
     }
-    this.phone_number = this.value;
+    this.phone_number = this.value.replace('+' + this.selectedCountry.dialCode + '-', '');
   }
 
   public onPhoneNumberChange(): void {
-    this.value = this.selectedCountry.dialCode + this.phone_number;
+    this.value = '+' + this.selectedCountry.dialCode + '-' + this.phone_number;
     this.valueChange.emit(this.value);
   }
 
   public onCountrySelect(country: Country, el): void {
     this.selectedCountry = country;
     if (this.phone_number.length > 0) {
-      this.value = this.selectedCountry.dialCode + this.phone_number;
+      this.value = '+' + this.selectedCountry.dialCode + '-' + this.phone_number;
       this.valueChange.emit(this.value);
     }
     el.focus();
